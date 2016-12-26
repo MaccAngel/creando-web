@@ -7,3 +7,17 @@ body{
 	background: #f15573;
 	color : #fff;
 }
+h1{
+	font-size: 1.2em;
+	text-transform: uppercase;
+	margin: .5em;
+	
+}
+h2{
+	font-size: 1em;
+	margin: .5em;
+}
+p{
+	font-size: .8em;
+	margin: 1em;
+}
