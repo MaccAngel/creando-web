@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../lib/auth.php';
 require_once __DIR__ . '/../lib/db.php';
+require_once __DIR__ . '/../lib/fechas.php';
 
 exigirSesionWeb();
 
@@ -37,29 +38,7 @@ function e(?string $s): string
     return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
 }
 
-/**
- * Calcula el estado de vencimiento de una tarea con fecha.
- * Devuelve [clase, etiqueta] o null si no aplica.
- */
-function estadoVencimiento(?string $fecha, DateTime $hoy, int $avisoDias): ?array
-{
-    if (!$fecha) {
-        return null;
-    }
-    $limite = new DateTime($fecha);
-    $dias = (int) $hoy->diff($limite)->format('%r%a');
-
-    if ($dias < 0) {
-        return ['vencida', 'Vencida'];
-    }
-    if ($dias === 0) {
-        return ['hoy', 'Vence hoy'];
-    }
-    if ($dias <= $avisoDias) {
-        return ['pronto', 'Vence pronto'];
-    }
-    return null;
-}
+// estadoVencimiento() vive en lib/fechas.php (reutilizable y testeable).
 
 // Contadores para el aviso superior.
 $totalVencidas = 0;

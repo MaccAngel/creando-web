@@ -27,7 +27,9 @@ function config(): array
     static $config = null;
 
     if ($config === null) {
-        $ruta = __DIR__ . '/../config.php';
+        // Permite usar una configuración alternativa (p. ej. en los tests)
+        // definiendo la variable de entorno RECORDATORIO_CONFIG.
+        $ruta = getenv('RECORDATORIO_CONFIG') ?: __DIR__ . '/../config.php';
         if (!is_file($ruta)) {
             throw new RuntimeException(
                 'No existe config.php. Copia config.example.php a config.php y rellénalo.'

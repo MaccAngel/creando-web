@@ -85,6 +85,60 @@ Abre <http://localhost:8000> y conecta tus cuentas desde la cabecera.
 
 ---
 
+## Arranque rápido con Docker (recomendado para probar)
+
+Si tienes Docker, no necesitas instalar PHP ni MySQL a mano. Levanta todo el
+entorno (base de datos con datos de ejemplo precargados, app y phpMyAdmin):
+
+```bash
+docker compose up --build
+```
+
+- App: <http://localhost:8000>
+- phpMyAdmin: <http://localhost:8080> (usuario `root`, contraseña `root`)
+
+La base de datos se inicializa automáticamente con `sql/esquema.sql` y
+`sql/datos_ejemplo.sql`, así que verás tareas de ejemplo nada más entrar.
+Para conectar el correo real, rellena las variables `GOOGLE_*` / `MS_*` en
+`docker-compose.yml`.
+
+Para detener y borrar los datos:
+
+```bash
+docker compose down -v
+```
+
+---
+
+## Datos de ejemplo (seeds)
+
+Para poblar la base de datos con tareas, filtros y reglas de prueba (sin Docker):
+
+```bash
+mysql -u root -p recordatorio_tareas < sql/datos_ejemplo.sql
+```
+
+Incluye tareas con distintos estados de vencimiento (vencida, hoy, pronto),
+una tarea importada de correo de ejemplo, y filtros y reglas de muestra.
+
+> ⚠️ El seed **vacía** las tablas `tareas`, `filtros` y `reglas` antes de
+> insertar, para que sea reproducible. No lo ejecutes sobre datos reales.
+
+---
+
+## Tests
+
+El proyecto incluye una batería de tests unitarios (PHPUnit) sobre la lógica
+pura: cifrado de tokens, filtros de correo, reglas de prioridad y estados de
+vencimiento. No necesitan base de datos.
+
+```bash
+composer install        # instala también phpunit (require-dev)
+composer test           # o: vendor/bin/phpunit
+```
+
+---
+
 ## Sincronización automática por cron
 
 Además del auto-sync del navegador (`auto_sync_min`), puedes programar:

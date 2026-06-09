@@ -19,18 +19,16 @@ require_once __DIR__ . '/correo.php';
 require_once __DIR__ . '/agenda.php';
 
 /**
- * Devuelve la prioridad asignada por la primera regla que coincida,
- * o 'media' por defecto.
+ * Lógica pura de coincidencia de reglas (sin acceso a base de datos).
+ *
+ * Devuelve la prioridad de la primera regla cuyo texto "contiene" aparezca
+ * en el asunto o remitente; 'media' si ninguna coincide.
+ *
+ * @param array<int, array{contiene:string, prioridad:string}> $reglas
  */
-function prioridadPorReglas(string $asunto, string $remitente): string
+function prioridadSegunReglas(string $asunto, string $remitente, array $reglas): string
 {
     $texto = mb_strtolower($asunto . ' ' . $remitente);
-
-    try {
-        $reglas = db()->query('SELECT contiene, prioridad FROM reglas')->fetchAll();
-    } catch (\Throwable $e) {
-        return 'media'; // tabla inexistente: prioridad por defecto
-    }
 
     foreach ($reglas as $r) {
         $aguja = mb_strtolower($r['contiene']);
@@ -40,6 +38,21 @@ function prioridadPorReglas(string $asunto, string $remitente): string
     }
 
     return 'media';
+}
+
+/**
+ * Devuelve la prioridad asignada por la primera regla que coincida,
+ * o 'media' por defecto. Lee las reglas de la base de datos.
+ */
+function prioridadPorReglas(string $asunto, string $remitente): string
+{
+    try {
+        $reglas = db()->query('SELECT contiene, prioridad FROM reglas')->fetchAll();
+    } catch (\Throwable $e) {
+        return 'media'; // tabla inexistente: prioridad por defecto
+    }
+
+    return prioridadSegunReglas($asunto, $remitente, $reglas);
 }
 
 /**
