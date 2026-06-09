@@ -1,0 +1,382 @@
+// ===================================================================
+// Estilos de "Recordatorio de Tareas"
+// Compilar con:  sass public/assets/style.scss public/assets/style.css
+// ===================================================================
+
+// --- Variables -----------------------------------------------------
+$color-fondo:      #f4f6f9;
+$color-tarjeta:    #ffffff;
+$color-texto:      #1f2937;
+$color-suave:      #6b7280;
+$color-primario:   #2563eb;
+$color-primario-osc: #1d4ed8;
+$color-borde:      #e5e7eb;
+$color-ok:         #16a34a;
+
+// Colores por prioridad (se recorren con @each).
+$prioridades: (
+    baja:  #10b981,
+    media: #f59e0b,
+    alta:  #ef4444,
+);
+
+// Colores de badges de vencimiento.
+$color-vencida: #ef4444;
+$color-hoy:     #f59e0b;
+$color-pronto:  #3b82f6;
+
+$radio: 10px;
+$sombra: 0 1px 3px rgba(0, 0, 0, .08);
+
+// --- Base ----------------------------------------------------------
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: $color-fondo;
+    color: $color-texto;
+    line-height: 1.5;
+}
+
+a { color: $color-primario; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+// --- Cabecera ------------------------------------------------------
+.cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: 1rem 1.5rem;
+    background: $color-tarjeta;
+    box-shadow: $sombra;
+
+    h1 { font-size: 1.25rem; }
+
+    .acciones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+    }
+}
+
+// --- Botones -------------------------------------------------------
+.btn {
+    display: inline-block;
+    padding: .45rem .8rem;
+    border: 1px solid $color-borde;
+    border-radius: $radio;
+    background: $color-tarjeta;
+    color: $color-texto;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+
+    &:hover { background: #f0f3f7; text-decoration: none; }
+}
+
+.btn-primario {
+    background: $color-primario;
+    border-color: $color-primario;
+    color: #fff;
+
+    &:hover { background: $color-primario-osc; }
+}
+
+.btn-icono {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: .25rem;
+    border-radius: 6px;
+
+    &:hover { background: #f0f3f7; }
+}
+
+// --- Contenido / tarjetas -----------------------------------------
+.contenido {
+    max-width: 860px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.tarjeta {
+    background: $color-tarjeta;
+    border-radius: $radio;
+    box-shadow: $sombra;
+    padding: 1.25rem;
+
+    h2 { font-size: 1.05rem; margin-bottom: .75rem; }
+}
+
+.rejilla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+// --- Avisos --------------------------------------------------------
+.aviso {
+    padding: .7rem 1rem;
+    border-radius: $radio;
+    font-size: .92rem;
+}
+.aviso-vencimiento { background: #fef3c7; color: #92400e; }
+.aviso-ok { background: #dcfce7; color: #166534; }
+
+// --- Cuentas -------------------------------------------------------
+.lista-cuentas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+
+    li { display: flex; align-items: center; gap: .5rem; }
+}
+
+.proveedor {
+    font-size: .72rem;
+    font-weight: 600;
+    padding: .15rem .5rem;
+    border-radius: 999px;
+    color: #fff;
+
+    &.proveedor-google { background: #ea4335; }
+    &.proveedor-microsoft { background: #0078d4; }
+}
+
+.reconectar {
+    color: $color-vencida;
+    font-weight: 600;
+    font-size: .85rem;
+}
+
+// --- Lista de tareas ----------------------------------------------
+.lista-tareas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarea {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    padding: .8rem 0;
+    border-bottom: 1px solid $color-borde;
+
+    &:last-child { border-bottom: none; }
+
+    &.completada {
+        opacity: .55;
+        .tarea-titulo .texto { text-decoration: line-through; }
+    }
+
+    .check-completar { margin-top: .35rem; width: 1.1rem; height: 1.1rem; cursor: pointer; }
+}
+
+.tarea-cuerpo { flex: 1; min-width: 0; }
+
+.tarea-titulo {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+    font-weight: 500;
+}
+
+.tarea-notas {
+    color: $color-suave;
+    font-size: .88rem;
+    margin-top: .25rem;
+}
+
+.tarea-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: .4rem;
+
+    .meta { color: $color-suave; font-size: .82rem; }
+    .enlace { color: $color-primario; }
+}
+
+.tarea-acciones { display: flex; gap: .15rem; }
+
+// --- Prioridades (generadas con @each) ----------------------------
+.prioridad {
+    display: inline-block;
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+@each $nombre, $color in $prioridades {
+    .prioridad-#{$nombre} { background: $color; }
+}
+
+// --- Badges de vencimiento ----------------------------------------
+.badge {
+    font-size: .72rem;
+    font-weight: 600;
+    padding: .1rem .5rem;
+    border-radius: 999px;
+    color: #fff;
+}
+.badge-vencida { background: $color-vencida; }
+.badge-hoy { background: $color-hoy; }
+.badge-pronto { background: $color-pronto; }
+
+// --- Listas simples (filtros / reglas) ----------------------------
+.lista-simple {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    margin-top: .75rem;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        padding: .35rem 0;
+        border-bottom: 1px solid $color-borde;
+    }
+    .vacio { border: none; }
+}
+
+.etiqueta {
+    font-size: .72rem;
+    background: #eef2ff;
+    color: #3730a3;
+    padding: .1rem .45rem;
+    border-radius: 999px;
+}
+
+.en-linea { margin-left: auto; }
+
+.ayuda { color: $color-suave; font-size: .85rem; margin-bottom: .5rem; }
+.vacio { color: $color-suave; font-style: italic; }
+
+// --- Formularios ---------------------------------------------------
+.formulario-linea {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+
+    input[type="text"] { flex: 1; min-width: 140px; }
+}
+
+input, select, textarea {
+    padding: .45rem .6rem;
+    border: 1px solid $color-borde;
+    border-radius: 8px;
+    font-size: .9rem;
+    font-family: inherit;
+    width: 100%;
+}
+
+// --- Modales -------------------------------------------------------
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 100;
+
+    &.oculto { display: none; }
+}
+
+.modal-caja {
+    background: $color-tarjeta;
+    border-radius: $radio;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+
+    h3 { margin-bottom: 1rem; }
+
+    label {
+        display: block;
+        font-size: .85rem;
+        color: $color-suave;
+        margin-bottom: .75rem;
+
+        input, select, textarea { margin-top: .25rem; }
+    }
+}
+
+.dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+}
+
+.modal-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: .5rem;
+    margin-top: 1rem;
+}
+
+.lista-correos {
+    max-height: 340px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: .75rem 0;
+}
+
+.correo-item {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .6rem;
+    border: 1px solid $color-borde;
+    border-radius: 8px;
+
+    .correo-info { flex: 1; min-width: 0; }
+    strong { display: block; font-size: .9rem; }
+    small { color: $color-suave; font-size: .8rem; }
+}
+
+// --- Página de login ----------------------------------------------
+.pagina-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.login {
+    background: $color-tarjeta;
+    padding: 2rem;
+    border-radius: $radio;
+    box-shadow: $sombra;
+    text-align: center;
+    max-width: 320px;
+    width: 100%;
+
+    h1 { font-size: 1.2rem; margin-bottom: .5rem; }
+    p { color: $color-suave; margin-bottom: 1rem; }
+    form { display: flex; flex-direction: column; gap: .75rem; }
+    .error { color: $color-vencida; }
+}
+
+// --- Responsive ----------------------------------------------------
+@media (max-width: 640px) {
+    .rejilla { grid-template-columns: 1fr; }
+    .dos-columnas { grid-template-columns: 1fr; }
+    .cabecera { flex-direction: column; align-items: flex-start; }
+}

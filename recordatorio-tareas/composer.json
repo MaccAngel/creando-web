@@ -1,0 +1,21 @@
+{
+    "name": "local/recordatorio-tareas",
+    "description": "Recordatorio de Tareas: app web local que crea tareas desde Gmail/Outlook y las escribe en el calendario.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-sodium": "*",
+        "ext-curl": "*",
+        "league/oauth2-client": "^2.7",
+        "league/oauth2-google": "^4.0",
+        "thenetworg/oauth2-azure": "^2.2"
+    },
+    "autoload": {
+        "files": []
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}
