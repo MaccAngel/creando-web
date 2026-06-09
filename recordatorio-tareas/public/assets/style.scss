@@ -374,9 +374,179 @@ input, select, textarea {
     .error { color: $color-vencida; }
 }
 
+// ===================================================================
+// Panel (dashboard)
+// ===================================================================
+
+// --- Tarjetas KPI --------------------------------------------------
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+}
+
+.kpi {
+    background: $color-tarjeta;
+    border-radius: $radio;
+    box-shadow: $sombra;
+    padding: 1rem 1.1rem;
+    border-left: 4px solid $color-primario;
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+
+    &-num { font-size: 1.9rem; font-weight: 700; line-height: 1; }
+    &-lbl { color: $color-suave; font-size: .82rem; }
+
+    &.kpi-ok     { border-left-color: $color-ok; }
+    &.kpi-alerta { border-left-color: $color-vencida; }
+    &.kpi-aviso  { border-left-color: $color-hoy; }
+}
+
+// --- Anillo de progreso (conic-gradient) ---------------------------
+.progreso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+}
+
+.anillo {
+    --pct: 0;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    // El relleno se calcula con el porcentaje (--pct de 0 a 100).
+    background: conic-gradient(
+        $color-primario calc(var(--pct) * 1%),
+        $color-borde 0
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Hueco central para convertirlo en "donut".
+    &::before {
+        content: "";
+        position: absolute;
+        width: 104px;
+        height: 104px;
+        border-radius: 50%;
+        background: $color-tarjeta;
+    }
+
+    &-num {
+        position: relative;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+}
+
+// --- Barras horizontales (prioridad / cuenta) ----------------------
+.barra-fila {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin: .5rem 0;
+}
+
+.barra-etq {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    width: 38%;
+    font-size: .85rem;
+
+    .cuenta-email {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.barra {
+    flex: 1;
+    height: 12px;
+    background: $color-borde;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.barra-relleno {
+    height: 100%;
+    border-radius: 999px;
+    background: $color-primario;
+    transition: width .3s ease;
+}
+
+// Color de cada barra de prioridad (reusa el mapa $prioridades).
+@each $nombre, $color in $prioridades {
+    .barra-#{$nombre} { background: $color; }
+}
+
+.barra-num { width: 2rem; text-align: right; font-weight: 600; font-size: .9rem; }
+
+// --- Barra doble (origen de las tareas) ----------------------------
+.barra-doble {
+    display: flex;
+    height: 16px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: $color-borde;
+    margin-bottom: .75rem;
+}
+
+.seg { height: 100%; }
+.seg-manual { background: $color-primario; }
+.seg-email  { background: $color-ok; }
+
+.leyenda {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: .85rem;
+
+    li { display: flex; align-items: center; gap: .35rem; }
+}
+
+.punto {
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+// --- Lista de próximos vencimientos --------------------------------
+.lista-proximas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+        padding: .55rem 0;
+        border-bottom: 1px solid $color-borde;
+
+        &:last-child { border-bottom: none; }
+    }
+
+    .proxima-titulo {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .proxima-fecha { color: $color-suave; font-size: .82rem; }
+}
+
 // --- Responsive ----------------------------------------------------
 @media (max-width: 640px) {
     .rejilla { grid-template-columns: 1fr; }
     .dos-columnas { grid-template-columns: 1fr; }
     .cabecera { flex-direction: column; align-items: flex-start; }
+    .barra-etq { width: 45%; }
 }

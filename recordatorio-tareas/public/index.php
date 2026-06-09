@@ -72,6 +72,7 @@ foreach ($tareas as $t) {
         <nav class="acciones">
             <button id="btn-nueva" class="btn btn-primario">＋ Nueva tarea</button>
             <button id="btn-sincronizar" class="btn">🔄 Sincronizar</button>
+            <a class="btn" href="dashboard.php">📊 Panel</a>
             <a class="btn" href="filtros.php">⚙️ Filtros</a>
             <a class="btn" href="oauth_iniciar.php?p=google">＋ Gmail</a>
             <a class="btn" href="oauth_iniciar.php?p=microsoft">＋ Outlook</a>

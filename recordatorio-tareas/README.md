@@ -6,6 +6,8 @@ se conecta a tu correo (**Gmail** y **Outlook**) para:
 - Crear tareas automáticamente a partir de correos **destacados / prioritarios**.
 - Escribir cada tarea como **evento en tu calendario** (Google / Outlook).
 - Avisarte de **vencimientos** (vencidas, hoy, pronto).
+- Visualizar tu progreso en un **panel** (`dashboard.php`): KPIs, anillo de
+  progreso y desgloses por prioridad, origen y cuenta.
 
 Stack: **PHP 8.1+** (PDO + MySQL/MariaDB, consultas preparadas), **JavaScript
 vanilla** y **SCSS**. Sin frameworks de PHP.
