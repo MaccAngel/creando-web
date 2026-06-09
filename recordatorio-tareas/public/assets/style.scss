@@ -543,10 +543,49 @@ input, select, textarea {
     .proxima-fecha { color: $color-suave; font-size: .82rem; }
 }
 
+// --- Gráfico de tendencia (columnas) -------------------------------
+.grafico-tendencia {
+    display: flex;
+    align-items: flex-end;
+    gap: .4rem;
+    height: 160px;
+    padding-top: .5rem;
+}
+
+.col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    gap: .25rem;
+
+    &-valor { font-size: .72rem; color: $color-suave; height: 1em; }
+
+    &-barra {
+        width: 70%;
+        min-height: 2px;
+        background: $color-primario;
+        border-radius: 4px 4px 0 0;
+        transition: height .3s ease;
+    }
+
+    &:hover .col-barra { background: $color-primario-osc; }
+
+    &-etq {
+        font-size: .68rem;
+        color: $color-suave;
+        white-space: nowrap;
+    }
+}
+
 // --- Responsive ----------------------------------------------------
 @media (max-width: 640px) {
     .rejilla { grid-template-columns: 1fr; }
     .dos-columnas { grid-template-columns: 1fr; }
     .cabecera { flex-direction: column; align-items: flex-start; }
     .barra-etq { width: 45%; }
+    .grafico-tendencia { height: 130px; }
+    .col-etq { font-size: .6rem; }
 }

@@ -616,6 +616,44 @@ input, select, textarea {
   font-size: 0.82rem;
 }
 
+.grafico-tendencia {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+  height: 160px;
+  padding-top: 0.5rem;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 0.25rem;
+}
+.col-valor {
+  font-size: 0.72rem;
+  color: #6b7280;
+  height: 1em;
+}
+.col-barra {
+  width: 70%;
+  min-height: 2px;
+  background: #2563eb;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s ease;
+}
+.col:hover .col-barra {
+  background: #1d4ed8;
+}
+.col-etq {
+  font-size: 0.68rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
 @media (max-width: 640px) {
   .rejilla {
     grid-template-columns: 1fr;
@@ -629,5 +667,11 @@ input, select, textarea {
   }
   .barra-etq {
     width: 45%;
+  }
+  .grafico-tendencia {
+    height: 130px;
+  }
+  .col-etq {
+    font-size: 0.6rem;
   }
 }

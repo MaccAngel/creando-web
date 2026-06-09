@@ -26,6 +26,8 @@ require_once __DIR__ . '/../lib/db.php';
 require_once __DIR__ . '/../lib/correo.php';
 require_once __DIR__ . '/../lib/agenda.php';
 require_once __DIR__ . '/../lib/sync.php';
+require_once __DIR__ . '/../lib/fechas.php';
+require_once __DIR__ . '/../lib/estadisticas.php';
 
 exigirSesionApi();
 
@@ -182,6 +184,29 @@ try {
                 'ok'      => true,
                 'nuevas'  => $resultado['nuevas'],
                 'errores' => $resultado['errores'],
+            ]);
+            break;
+
+            // -------------------------------------------------------------
+            // Estadísticas del panel (para el auto-refresco del dashboard).
+        case 'estadisticas':
+            $cfg = config();
+            $hoy = new DateTime('today');
+            $avisoDias = (int) ($cfg['aviso_dias'] ?? 2);
+
+            $tareas = $pdo->query(
+                'SELECT id, completada, prioridad, fuente, fecha_limite FROM tareas'
+            )->fetchAll();
+
+            $resumen = resumirTareas($tareas, $hoy, $avisoDias);
+            $tendencia = tendenciaCreacion($pdo, $hoy, 14);
+
+            responder([
+                'ok'        => true,
+                'resumen'   => $resumen,
+                'tendencia' => $tendencia,
+                // Firma para detectar cambios sin recargar de más.
+                'firma'     => $resumen['total'] . '-' . $resumen['completadas'],
             ]);
             break;
 

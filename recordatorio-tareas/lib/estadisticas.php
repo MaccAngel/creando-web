@@ -90,3 +90,61 @@ function resumirTareas(array $tareas, DateTime $hoy, int $avisoDias): array
 
     return $r;
 }
+
+/**
+ * Construye una serie diaria de los últimos $dias días (PURA).
+ *
+ * Rellena con 0 los días sin tareas, de modo que la serie siempre tenga
+ * exactamente $dias elementos en orden cronológico (del más antiguo a hoy).
+ *
+ * @param array<string,int> $conteos Mapa 'Y-m-d' => total (días sueltos).
+ * @return array<int, array{fecha:string, etiqueta:string, total:int}>
+ */
+function serieTendencia(array $conteos, DateTime $hoy, int $dias): array
+{
+    $serie = [];
+    for ($i = $dias - 1; $i >= 0; $i--) {
+        $dia = (clone $hoy)->modify("-$i day");
+        $clave = $dia->format('Y-m-d');
+        $serie[] = [
+            'fecha'    => $clave,
+            'etiqueta' => $dia->format('d/m'),
+            'total'    => (int) ($conteos[$clave] ?? 0),
+        ];
+    }
+    return $serie;
+}
+
+/**
+ * Tendencia de tareas creadas por día en los últimos $dias días.
+ *
+ * Lee de la BD (agrupando por fecha de creación) y delega el relleno de días
+ * en serieTendencia(). Devuelve también el máximo para escalar las barras.
+ *
+ * @return array{serie:array<int,array{fecha:string,etiqueta:string,total:int}>, max:int}
+ */
+function tendenciaCreacion(PDO $pdo, DateTime $hoy, int $dias = 14): array
+{
+    $desde = (clone $hoy)->modify('-' . ($dias - 1) . ' day')->format('Y-m-d');
+
+    $st = $pdo->prepare(
+        'SELECT DATE(creada_en) AS dia, COUNT(*) AS total
+           FROM tareas
+          WHERE creada_en >= ?
+          GROUP BY DATE(creada_en)'
+    );
+    $st->execute([$desde . ' 00:00:00']);
+
+    $conteos = [];
+    foreach ($st->fetchAll() as $fila) {
+        $conteos[$fila['dia']] = (int) $fila['total'];
+    }
+
+    $serie = serieTendencia($conteos, $hoy, $dias);
+    $max = 0;
+    foreach ($serie as $d) {
+        $max = max($max, $d['total']);
+    }
+
+    return ['serie' => $serie, 'max' => $max];
+}

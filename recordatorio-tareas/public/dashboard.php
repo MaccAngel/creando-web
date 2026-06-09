@@ -55,6 +55,18 @@ $maxCuenta = 0;
 foreach ($porCuenta as $c) {
     $maxCuenta = max($maxCuenta, (int) $c['total']);
 }
+
+// Tendencia de tareas creadas en los últimos 14 días.
+$tendencia = tendenciaCreacion($pdo, $hoy, 14);
+
+// Firma del estado actual: si cambia, el auto-refresco recarga la página.
+$firma = $stats['total'] . '-' . $stats['completadas'];
+
+// Intervalo de auto-refresco (reutiliza auto_sync_min; 0 = desactivado).
+$refrescoMin = (int) ($cfg['auto_sync_min'] ?? 0);
+
+require_once __DIR__ . '/../lib/auth.php';
+$csrf = tokenCsrf();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -64,7 +76,10 @@ foreach ($porCuenta as $c) {
     <title>Panel · Recordatorio de Tareas</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body
+    data-csrf="<?= e($csrf) ?>"
+    data-firma="<?= e($firma) ?>"
+    data-refresh="<?= $refrescoMin ?>">
     <header class="cabecera">
         <h1>📊 Panel</h1>
         <nav class="acciones">
@@ -190,6 +205,25 @@ foreach ($porCuenta as $c) {
 
         </div>
 
+        <!-- Tendencia: tareas creadas en los últimos 14 días -->
+        <section class="tarjeta">
+            <h2>Tareas creadas (últimos 14 días)</h2>
+            <?php if ($tendencia['max'] === 0): ?>
+                <p class="vacio">No se han creado tareas en este periodo.</p>
+            <?php else: ?>
+                <div class="grafico-tendencia">
+                    <?php foreach ($tendencia['serie'] as $dia): ?>
+                        <?php $altura = pct($dia['total'], $tendencia['max']); ?>
+                        <div class="col" title="<?= e($dia['fecha']) ?>: <?= $dia['total'] ?> tarea(s)">
+                            <div class="col-valor"><?= $dia['total'] ?: '' ?></div>
+                            <div class="col-barra" style="height: <?= max($altura, 2) ?>%"></div>
+                            <div class="col-etq"><?= e($dia['etiqueta']) ?></div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </section>
+
         <!-- Próximos vencimientos -->
         <section class="tarjeta">
             <h2>Próximos vencimientos</h2>
@@ -217,5 +251,7 @@ foreach ($porCuenta as $c) {
         </section>
 
     </main>
+
+    <script src="assets/dashboard.js"></script>
 </body>
 </html>
