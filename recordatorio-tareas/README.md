@@ -128,14 +128,54 @@ una tarea importada de correo de ejemplo, y filtros y reglas de muestra.
 
 ## Tests
 
-El proyecto incluye una batería de tests unitarios (PHPUnit) sobre la lógica
-pura: cifrado de tokens, filtros de correo, reglas de prioridad y estados de
-vencimiento. No necesitan base de datos.
+El proyecto incluye dos suites de PHPUnit:
+
+- **Unitarios** — lógica pura (cifrado de tokens, filtros, reglas de prioridad,
+  estados de vencimiento). No necesitan base de datos.
+- **Integración** — contra una base de datos MySQL/MariaDB real (índice único
+  anti-duplicados, `ON DELETE SET NULL`, lectura de reglas/filtros, ciclo de
+  vida de tareas). Si no hay BD disponible, **se omiten** en lugar de fallar.
 
 ```bash
-composer install        # instala también phpunit (require-dev)
-composer test           # o: vendor/bin/phpunit
+composer install                 # instala también phpunit (require-dev)
+
+vendor/bin/phpunit               # toda la suite
+vendor/bin/phpunit --testsuite Unitarios
+vendor/bin/phpunit --testsuite Integracion
 ```
+
+Los tests de integración leen la conexión de variables de entorno
+(`DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`); por defecto usan
+`recordatorio_tareas_test` en `127.0.0.1` con `root` sin contraseña:
+
+```bash
+DB_PASS=miclave vendor/bin/phpunit --testsuite Integracion
+```
+
+---
+
+## Atajos con `make`
+
+```bash
+make help              # lista todos los comandos
+make install           # composer install
+make serve             # servidor de desarrollo en :8000
+make test DB_PASS=...   # toda la suite de tests
+make test-unit          # solo unitarios
+make up / make down     # entorno Docker
+make seed DB_PASS=...   # cargar datos de ejemplo
+make key                # generar una app_key
+```
+
+---
+
+## Integración continua (CI)
+
+`.github/workflows/ci.yml` ejecuta automáticamente en cada push/PR que toque
+`recordatorio-tareas/`:
+
+- **Lint** (`php -l`) y **tests unitarios**.
+- **Tests de integración** contra un servicio MariaDB.
 
 ---
 

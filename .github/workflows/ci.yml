@@ -1,0 +1,95 @@
+name: CI Recordatorio de Tareas
+
+# Ejecuta lint y tests del proyecto recordatorio-tareas en cada push y PR
+# que toque ese directorio.
+on:
+  push:
+    paths:
+      - 'recordatorio-tareas/**'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    paths:
+      - 'recordatorio-tareas/**'
+      - '.github/workflows/ci.yml'
+
+# Todos los comandos se ejecutan dentro del subproyecto.
+defaults:
+  run:
+    working-directory: recordatorio-tareas
+
+jobs:
+
+  # -------------------------------------------------------------------
+  # Lint + tests unitarios (sin base de datos).
+  # -------------------------------------------------------------------
+  unitarios:
+    name: Lint y tests unitarios
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, sodium, curl
+          coverage: none
+
+      - name: Cachear dependencias de Composer
+        uses: actions/cache@v4
+        with:
+          path: recordatorio-tareas/vendor
+          key: composer-${{ hashFiles('recordatorio-tareas/composer.json') }}
+
+      - name: Instalar dependencias
+        run: composer install --no-interaction --no-progress
+
+      - name: Comprobar sintaxis (php -l)
+        run: |
+          find lib public tests docker -name '*.php' -print0 \
+            | xargs -0 -n1 php -l
+
+      - name: Tests unitarios
+        run: vendor/bin/phpunit --testsuite Unitarios
+
+  # -------------------------------------------------------------------
+  # Tests de integración contra MariaDB real.
+  # -------------------------------------------------------------------
+  integracion:
+    name: Tests de integración (MariaDB)
+    runs-on: ubuntu-latest
+
+    services:
+      mariadb:
+        image: mariadb:11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: recordatorio_tareas_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=12
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, sodium, curl
+          coverage: none
+
+      - name: Instalar dependencias
+        run: composer install --no-interaction --no-progress
+
+      - name: Tests de integración
+        env:
+          DB_HOST: 127.0.0.1
+          DB_NAME: recordatorio_tareas_test
+          DB_USER: root
+          DB_PASS: root
+        run: vendor/bin/phpunit --testsuite Integracion

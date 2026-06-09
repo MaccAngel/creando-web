@@ -5,8 +5,14 @@
          colors="true"
          cacheDirectory=".phpunit.cache">
     <testsuites>
+        <!-- Tests unitarios: lógica pura, sin base de datos. -->
         <testsuite name="Unitarios">
             <directory>tests</directory>
+            <exclude>tests/Integration</exclude>
+        </testsuite>
+        <!-- Tests de integración: requieren MySQL/MariaDB. -->
+        <testsuite name="Integracion">
+            <directory>tests/Integration</directory>
         </testsuite>
     </testsuites>
     <source>

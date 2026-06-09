@@ -9,10 +9,12 @@
 
 return [
     'db' => [
-        'host'    => '127.0.0.1',
-        'nombre'  => 'recordatorio_tareas_test',
-        'usuario' => 'root',
-        'clave'   => '',
+        // Permite sobreescribir por entorno (CI / Docker). Valores por defecto
+        // pensados para una base de datos de pruebas local.
+        'host'    => getenv('DB_HOST') ?: '127.0.0.1',
+        'nombre'  => getenv('DB_NAME') ?: 'recordatorio_tareas_test',
+        'usuario' => getenv('DB_USER') ?: 'root',
+        'clave'   => getenv('DB_PASS') !== false ? getenv('DB_PASS') : '',
     ],
     'base_url' => 'http://localhost:8000',
     'google' => [
