@@ -10,6 +10,8 @@ CREATE DATABASE IF NOT EXISTS `recordatorio_tareas`
 
 USE `recordatorio_tareas`;
 
+SET NAMES utf8mb4;
+
 -- --------------------------------------------------------------------
 -- Cuentas de correo conectadas por OAuth (Google / Microsoft).
 -- --------------------------------------------------------------------

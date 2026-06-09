@@ -14,6 +14,28 @@
     const CSRF = cuerpo.dataset.csrf || '';
     const AUTO_SYNC_MIN = parseInt(cuerpo.dataset.autoSync || '0', 10);
 
+    // -------------------------------------------------------------------
+    // Notificaciones (toasts) — reemplazan a alert()
+    // -------------------------------------------------------------------
+    function toast(mensaje, tipo = 'ok') {
+        let cont = document.querySelector('.toast-contenedor');
+        if (!cont) {
+            cont = document.createElement('div');
+            cont.className = 'toast-contenedor';
+            document.body.appendChild(cont);
+        }
+        const t = document.createElement('div');
+        t.className = 'toast' + (tipo === 'error' ? ' toast-error' : '');
+        t.textContent = mensaje;
+        cont.appendChild(t);
+
+        // Auto-cierre con animación de salida.
+        setTimeout(() => {
+            t.classList.add('saliendo');
+            t.addEventListener('animationend', () => t.remove(), { once: true });
+        }, 3200);
+    }
+
     /** Llamada a la API JSON. Devuelve el objeto de respuesta. */
     async function api(accion, datos = {}) {
         const resp = await fetch('api.php', {
@@ -100,7 +122,7 @@
         if (r.ok) {
             window.location.reload();
         } else {
-            alert('Error: ' + (r.error || 'desconocido'));
+            toast('Error: ' + (r.error || 'desconocido'), 'error');
         }
     });
 
@@ -113,6 +135,7 @@
             const r = await api('completar', { id: parseInt(li.dataset.id, 10) });
             if (r.ok) {
                 li.classList.toggle('completada', chk.checked);
+                toast(chk.checked ? 'Tarea completada ✓' : 'Tarea reabierta');
             }
         });
     });
@@ -122,7 +145,10 @@
             if (!confirm('¿Borrar esta tarea?')) return;
             const li = btn.closest('.tarea');
             const r = await api('borrar', { id: parseInt(li.dataset.id, 10) });
-            if (r.ok) li.remove();
+            if (r.ok) {
+                li.remove();
+                toast('Tarea borrada');
+            }
         });
     });
 
@@ -183,7 +209,7 @@
         if (r.ok) {
             window.location.reload();
         } else {
-            alert('Error al vincular: ' + (r.error || 'desconocido'));
+            toast('Error al vincular: ' + (r.error || 'desconocido'), 'error');
         }
     }
 

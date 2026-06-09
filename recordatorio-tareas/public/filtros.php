@@ -84,12 +84,14 @@ function e(?string $s): string
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filtros y reglas · Recordatorio de Tareas</title>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/tema.js"></script>
 </head>
 <body>
     <header class="cabecera">
-        <h1>Filtros y reglas</h1>
+        <h1>⚙️ Filtros y reglas</h1>
         <nav class="acciones">
             <a class="btn" href="index.php">← Volver a tareas</a>
+            <button class="btn-icono" data-accion="tema" title="Cambiar tema" aria-label="Cambiar tema">🌓</button>
         </nav>
     </header>
 

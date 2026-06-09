@@ -62,6 +62,7 @@ foreach ($tareas as $t) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recordatorio de Tareas</title>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/tema.js"></script>
 </head>
 <body
     data-csrf="<?= e($csrf) ?>"
@@ -79,6 +80,7 @@ foreach ($tareas as $t) {
             <?php if (hayPin()): ?>
                 <a class="btn" href="login.php?salir=1">Salir</a>
             <?php endif; ?>
+            <button class="btn-icono" data-accion="tema" title="Cambiar tema" aria-label="Cambiar tema">🌓</button>
         </nav>
     </header>
 

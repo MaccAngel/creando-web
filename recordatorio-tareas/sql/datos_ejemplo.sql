@@ -9,6 +9,9 @@
 
 USE `recordatorio_tareas`;
 
+-- Asegura que el texto (acentos, ñ) se importe en UTF-8 con cualquier cliente.
+SET NAMES utf8mb4;
+
 -- Empezamos limpio para que el seed sea reproducible.
 DELETE FROM `tareas`;
 DELETE FROM `reglas`;

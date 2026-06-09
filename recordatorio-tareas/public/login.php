@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso · Recordatorio de Tareas</title>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/tema.js"></script>
 </head>
 <body class="pagina-login">
     <main class="login">

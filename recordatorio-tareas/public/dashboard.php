@@ -75,6 +75,7 @@ $csrf = tokenCsrf();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel · Recordatorio de Tareas</title>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/tema.js"></script>
 </head>
 <body
     data-csrf="<?= e($csrf) ?>"
@@ -85,6 +86,7 @@ $csrf = tokenCsrf();
         <nav class="acciones">
             <a class="btn" href="index.php">← Tareas</a>
             <a class="btn" href="filtros.php">⚙️ Filtros</a>
+            <button class="btn-icono" data-accion="tema" title="Cambiar tema" aria-label="Cambiar tema">🌓</button>
         </nav>
     </header>
 
