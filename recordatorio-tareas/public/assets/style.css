@@ -444,6 +444,31 @@ a:hover {
   color: #ef4444;
 }
 
+.chip-prioridad {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.chip-prioridad.es-baja {
+  background: #10b981;
+}
+
+.chip-prioridad.es-media {
+  background: #f59e0b;
+}
+
+.chip-prioridad.es-alta {
+  background: #ef4444;
+}
+
 .badge {
   font-size: 0.7rem;
   font-weight: 650;

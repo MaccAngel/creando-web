@@ -427,6 +427,24 @@ a:hover { color: var(--primario-osc); }
     .prioridad-#{$nombre} { background: $color; color: $color; }
 }
 
+// Chip de prioridad con texto (usado en el panel de reglas).
+.chip-prioridad {
+    display: inline-flex;
+    align-items: center;
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    letter-spacing: .02em;
+    padding: .18rem .6rem;
+    border-radius: 999px;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+@each $nombre, $color in $prioridades {
+    .chip-prioridad.es-#{$nombre} { background: $color; }
+}
+
 // --- Badges de vencimiento ----------------------------------------
 .badge {
     font-size: .7rem;

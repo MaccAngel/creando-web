@@ -159,7 +159,7 @@ function e(?string $s): string
                 <ul class="lista-simple">
                     <?php foreach ($reglas as $r): ?>
                         <li>
-                            <span class="prioridad prioridad-<?= e($r['prioridad']) ?>">
+                            <span class="chip-prioridad es-<?= e($r['prioridad']) ?>">
                                 <?= e($r['prioridad']) ?>
                             </span>
                             contiene «<?= e($r['contiene']) ?>»
