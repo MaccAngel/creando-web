@@ -1,4 +1,5 @@
 <?php
+
 /**
  * API JSON para el frontend.
  *
@@ -83,7 +84,7 @@ try {
             responder(['ok' => true, 'id' => $id]);
             break;
 
-        // -------------------------------------------------------------
+            // -------------------------------------------------------------
         case 'editar':
             $id = (int) ($cuerpo['id'] ?? 0);
             $titulo = trim($cuerpo['titulo'] ?? '');
@@ -111,7 +112,7 @@ try {
             responder(['ok' => true]);
             break;
 
-        // -------------------------------------------------------------
+            // -------------------------------------------------------------
         case 'completar':
             $id = (int) ($cuerpo['id'] ?? 0);
             $st = $pdo->prepare('UPDATE tareas SET completada = 1 - completada WHERE id = ?');
@@ -119,7 +120,7 @@ try {
             responder(['ok' => true]);
             break;
 
-        // -------------------------------------------------------------
+            // -------------------------------------------------------------
         case 'borrar':
             $id = (int) ($cuerpo['id'] ?? 0);
             $st = $pdo->prepare('DELETE FROM tareas WHERE id = ?');
@@ -127,8 +128,8 @@ try {
             responder(['ok' => true]);
             break;
 
-        // -------------------------------------------------------------
-        // Lista correos destacados de todas las cuentas (para vincular).
+            // -------------------------------------------------------------
+            // Lista correos destacados de todas las cuentas (para vincular).
         case 'correos':
             $cuentas = $pdo->query('SELECT * FROM cuentas WHERE requiere_reconexion = 0')->fetchAll();
             $filtros = filtrosActivos();
@@ -150,8 +151,8 @@ try {
             responder(['ok' => true, 'correos' => $salida]);
             break;
 
-        // -------------------------------------------------------------
-        // Asocia un correo a una tarea existente.
+            // -------------------------------------------------------------
+            // Asocia un correo a una tarea existente.
         case 'vincular':
             $id = (int) ($cuerpo['id'] ?? 0);
             if ($id <= 0) {
@@ -174,7 +175,7 @@ try {
             responder(['ok' => true]);
             break;
 
-        // -------------------------------------------------------------
+            // -------------------------------------------------------------
         case 'sincronizar':
             $resultado = sincronizarCuentas();
             responder([
@@ -184,7 +185,7 @@ try {
             ]);
             break;
 
-        // -------------------------------------------------------------
+            // -------------------------------------------------------------
         default:
             responder(['ok' => false, 'error' => 'Acción desconocida'], 404);
     }

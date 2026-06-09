@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Lectura de correos "para acción", refresco de tokens y filtros.
  *
@@ -204,7 +205,7 @@ function leerCorreosMicrosoft(string $token, array $omitir): array
 {
     $filtro = urlencode("flag/flagStatus eq 'flagged' and inferenceClassification eq 'focused'");
     $select = 'subject,from,webLink';
-    $url = "https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages"
+    $url = 'https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messages'
          . "?\$filter=$filtro&\$select=$select&\$top=25";
 
     $datos = apiGet($token, $url);

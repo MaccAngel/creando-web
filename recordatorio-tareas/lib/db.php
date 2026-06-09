@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Conexión PDO única a MySQL/MariaDB.
  *

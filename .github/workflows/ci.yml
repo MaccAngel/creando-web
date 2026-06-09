@@ -53,6 +53,33 @@ jobs:
         run: vendor/bin/phpunit --testsuite Unitarios
 
   # -------------------------------------------------------------------
+  # Estilo de código: PHP CS Fixer (formato) + PHP_CodeSniffer (PSR-12).
+  # -------------------------------------------------------------------
+  estilo:
+    name: Estilo de código
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, sodium, curl
+          coverage: none
+
+      - name: Instalar dependencias
+        run: composer install --no-interaction --no-progress
+
+      - name: PHP CS Fixer (verificación, no modifica)
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: 1
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff
+
+      - name: PHP_CodeSniffer (PSR-12)
+        run: vendor/bin/phpcs
+
+  # -------------------------------------------------------------------
   # Tests de integración contra MariaDB real.
   # -------------------------------------------------------------------
   integracion:

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Inicio del flujo OAuth.
  *

@@ -11,7 +11,7 @@ DB_PASS ?=
 .DEFAULT_GOAL := help
 
 .PHONY: help install serve css test test-unit test-integration lint \
-        up down logs seed config key
+        cs cs-fix sniff estilo up down logs seed config key
 
 help: ## Muestra esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
@@ -37,6 +37,17 @@ test-integration: ## Ejecuta solo los tests de integración (requiere BD)
 
 lint: ## Comprueba la sintaxis de todos los archivos PHP
 	@find lib public tests docker -name '*.php' -print0 | xargs -0 -n1 php -l
+
+cs: ## Estilo: muestra los cambios de formato (PHP CS Fixer, sin modificar)
+	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff
+
+cs-fix: ## Estilo: aplica el formato automático (PHP CS Fixer)
+	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix
+
+sniff: ## Estilo: comprueba PSR-12 en lib/ y tests/ (PHP_CodeSniffer)
+	vendor/bin/phpcs
+
+estilo: cs sniff ## Estilo: ejecuta ambas comprobaciones (fixer + sniffer)
 
 up: ## Levanta el entorno Docker (db + app + phpMyAdmin)
 	docker compose up --build

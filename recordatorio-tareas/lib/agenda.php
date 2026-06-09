@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Agenda automática: crea/actualiza eventos de calendario por tarea.
  *

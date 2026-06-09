@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Integration;
 
-use PHPUnit\Framework\TestCase;
 use PDO;
+use PHPUnit\Framework\TestCase;
 
 require_once __DIR__ . '/../../lib/db.php';
 require_once __DIR__ . '/../../lib/sync.php';     // prioridadPorReglas()
@@ -63,9 +63,11 @@ final class BaseDeDatosTest extends TestCase
             $limpia = trim(implode("\n", $lineas));
 
             // La BD ya está seleccionada por el DSN: ignorar CREATE DATABASE / USE.
-            if ($limpia === ''
+            if (
+                $limpia === ''
                 || preg_match('/^CREATE\s+DATABASE/i', $limpia)
-                || preg_match('/^USE\b/i', $limpia)) {
+                || preg_match('/^USE\b/i', $limpia)
+            ) {
                 continue;
             }
 

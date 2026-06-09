@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Utilidades de fechas para los recordatorios de vencimiento.
  *

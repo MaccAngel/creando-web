@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Configuración global y fábricas de proveedores OAuth.
  *

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Cifrado simétrico de tokens OAuth con libsodium.
  *

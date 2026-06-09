@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sincronización por web o por CLI (cron).
  *

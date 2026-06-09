@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Seguridad transversal: PIN opcional, sesión y CSRF.
  *

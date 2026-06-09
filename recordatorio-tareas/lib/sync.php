@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Sincronización reutilizable y reglas de prioridad.
  *

@@ -196,7 +196,7 @@ foreach ($porCuenta as $c) {
             <?php
             // Mostrar las próximas 6 tareas pendientes con fecha.
             $proximas = array_slice($stats['proximas'], 0, 6);
-            ?>
+?>
             <?php if (!$proximas): ?>
                 <p class="vacio">No hay tareas pendientes con fecha límite.</p>
             <?php else: ?>

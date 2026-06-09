@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Cálculo de estadísticas para el panel (dashboard).
  *
