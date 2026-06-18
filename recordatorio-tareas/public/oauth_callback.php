@@ -18,7 +18,10 @@ require_once __DIR__ . '/../lib/proveedores.php';
 exigirSesionWeb();
 iniciarSesion();
 
-$p = $_GET['p'] ?? '';
+// El proveedor se guardó en la sesión al iniciar el flujo. Así la redirect URI
+// no necesita parámetros de consulta (Microsoft no los admite con cuentas
+// personales de Outlook.com). Se acepta ?p= como respaldo.
+$p = $_SESSION['oauth_proveedor'] ?? ($_GET['p'] ?? '');
 if (!in_array($p, ['google', 'microsoft'], true)) {
     http_response_code(400);
     exit('Proveedor no válido.');

@@ -104,7 +104,9 @@ y **integración** (servicio MariaDB).
 
 ## OAuth (recordatorios)
 
-- Redirect URI: `{base_url}/oauth_callback.php?p=google|microsoft`.
+- Redirect URI (sin query, la comparten ambos): `{base_url}/oauth_callback.php`.
+  El proveedor se recuerda en la sesión (Microsoft no admite `?query` en la
+  redirect URI con cuentas personales de Outlook.com).
 - Google: `access_type=offline` + `prompt=consent` para recibir refresh_token.
 - Microsoft: endpoint **v2.0** (provider thenetworg/oauth2-azure).
 - Validar siempre el parámetro `state` en el callback.

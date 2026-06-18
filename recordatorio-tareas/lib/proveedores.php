@@ -48,12 +48,16 @@ function config(): array
 }
 
 /**
- * Construye la redirect URI del callback para un proveedor.
+ * Construye la redirect URI del callback.
+ *
+ * Sin parámetros de consulta: Microsoft no los admite en la redirect URI para
+ * cuentas personales (Outlook.com/Hotmail). El proveedor se recuerda en la
+ * sesión. Google y Microsoft comparten la misma URI.
  */
-function urlCallback(string $proveedor): string
+function urlCallback(string $proveedor = ''): string
 {
     $cfg = config();
-    return rtrim($cfg['base_url'], '/') . '/oauth_callback.php?p=' . urlencode($proveedor);
+    return rtrim($cfg['base_url'], '/') . '/oauth_callback.php';
 }
 
 /**

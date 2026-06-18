@@ -50,20 +50,23 @@ Esto crea la base de datos `recordatorio_tareas` y sus tablas.
 
 ### 5. Registrar las apps OAuth
 
+> Guía detallada paso a paso (con avisos de los errores típicos):
+> **[docs/CONECTAR-CORREO.md](docs/CONECTAR-CORREO.md)**.
+
 **Google Cloud Console**
 
 1. Crea un proyecto y **activa Gmail API** y **Google Calendar API**.
 2. Configura la pantalla de consentimiento OAuth.
 3. Crea una credencial **ID de cliente OAuth → Aplicación web**.
 4. Añade como *URI de redirección autorizado*:
-   `http://localhost:8000/oauth_callback.php?p=google`
+   `http://localhost:8000/oauth_callback.php`
 5. Copia `client_id` y `client_secret` en `config.php` → `'google'`.
 
 **Microsoft Entra (Azure)**
 
 1. **Registros de aplicaciones → Nuevo registro** (cuentas según `tenant`).
 2. En *Autenticación*, añade una plataforma **Web** con la URI:
-   `http://localhost:8000/oauth_callback.php?p=microsoft`
+   `http://localhost:8000/oauth_callback.php`
 3. En *Permisos de API* añade permisos **delegados** de Microsoft Graph:
    `User.Read`, `Mail.Read`, `offline_access`, `Calendars.ReadWrite`.
 4. En *Certificados y secretos*, crea un **secreto de cliente**.
