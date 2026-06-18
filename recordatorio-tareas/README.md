@@ -130,6 +130,24 @@ La forma más sencilla en Windows. No necesitas instalar PHP ni MySQL.
 > autocontenido (no depende de archivos del host), por lo que evita los típicos
 > problemas de rutas y finales de línea (CRLF) en Windows.
 
+### Instalación en Windows (nativa, con XAMPP) — sin Docker
+
+Si prefieres no usar Docker, hay un instalador nativo en la carpeta `windows/`.
+
+1. Instala **XAMPP**: <https://www.apachefriends.org> (o **Laragon**).
+2. Abre el **XAMPP Control Panel** y pulsa **Start** en **MySQL** (Apache no
+   hace falta: se usa el servidor propio de PHP).
+3. Doble clic en **`windows\instalar.bat`**. El instalador:
+   - detecta PHP y MySQL automáticamente;
+   - comprueba las extensiones `sodium`, `pdo_mysql`, `curl`;
+   - te pide usuario/clave de MySQL (en XAMPP: `root` y clave **vacía**);
+   - genera `config.php` con una clave de cifrado nueva;
+   - crea la base de datos y carga los datos de ejemplo.
+4. Doble clic en **`windows\iniciar.bat`** → se abre <http://localhost:8000>.
+   Para detener: cierra la ventana del servidor.
+
+Más detalles y solución de problemas en `windows/LEEME.txt`.
+
 ---
 
 ## Datos de ejemplo (seeds)

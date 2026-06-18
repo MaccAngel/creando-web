@@ -1,0 +1,48 @@
+========================================================================
+  Recordatorio de Tareas — Instalación NATIVA en Windows (sin Docker)
+========================================================================
+
+Esta carpeta contiene el instalador para usar la aplicación con XAMPP o
+Laragon (PHP + MySQL/MariaDB), SIN Docker.
+
+¿Prefieres Docker? Entonces NO uses esta carpeta: en la raíz del proyecto
+tienes "iniciar-windows.bat" (Docker), que es aún más sencillo.
+
+------------------------------------------------------------------------
+PASOS (opción nativa con XAMPP)
+------------------------------------------------------------------------
+
+1) Instala XAMPP:  https://www.apachefriends.org
+   (Laragon también vale: https://laragon.org)
+
+2) Abre el "XAMPP Control Panel" y pulsa START en MySQL.
+   (No hace falta arrancar Apache: usamos el servidor propio de PHP.)
+
+3) Doble clic en:   instalar.bat
+   - Detecta PHP y MySQL automáticamente.
+   - Comprueba las extensiones necesarias (sodium, pdo_mysql, curl).
+   - Te pide el usuario/clave de MySQL (en XAMPP: usuario "root" y clave VACÍA).
+   - Crea config.php con una clave de cifrado nueva.
+   - Crea la base de datos y carga datos de ejemplo.
+
+4) Cuando termine, doble clic en:   iniciar.bat
+   Se abrirá el navegador en  http://localhost:8000
+
+Para DETENER la aplicación: cierra la ventana negra del servidor.
+
+------------------------------------------------------------------------
+PROBLEMAS FRECUENTES
+------------------------------------------------------------------------
+
+- "No se pudo conectar a MySQL": asegúrate de haber pulsado START en MySQL
+  dentro del XAMPP Control Panel, y de que el usuario/clave son correctos.
+
+- "Faltan extensiones de PHP": abre el php.ini de tu PHP (instalar.bat te dice
+  cuál con  php --ini) y quita el punto y coma de:
+      extension=sodium
+      extension=pdo_mysql
+      extension=curl
+  Guarda y vuelve a ejecutar instalar.bat.
+
+- Para conectar Gmail/Outlook (opcional), edita config.php y rellena las
+  credenciales OAuth de Google y Microsoft (ver README.md).
