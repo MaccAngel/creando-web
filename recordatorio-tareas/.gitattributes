@@ -1,0 +1,12 @@
+# Normaliza finales de línea para evitar que Windows (CRLF) rompa los scripts
+# de shell dentro de los contenedores Docker.
+* text=auto eol=lf
+*.sh text eol=lf
+docker/entrypoint.sh text eol=lf
+
+# Los .bat son de Windows: deben conservar CRLF.
+*.bat text eol=crlf
+
+# Binarios.
+*.png binary
+*.zip binary

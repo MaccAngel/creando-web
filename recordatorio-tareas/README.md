@@ -111,6 +111,25 @@ Para detener y borrar los datos:
 docker compose down -v
 ```
 
+### Instalación en Windows (con Docker) — paso a paso
+
+La forma más sencilla en Windows. No necesitas instalar PHP ni MySQL.
+
+1. Instala **Docker Desktop**: <https://www.docker.com/products/docker-desktop/>
+   y ábrelo (espera a que el icono de la ballena deje de animarse).
+2. Descomprime el proyecto en una carpeta, por ejemplo `C:\recordatorio-tareas`.
+3. Haz **doble clic en `iniciar-windows.bat`** (o, en una terminal dentro de la
+   carpeta, ejecuta `docker compose up --build`).
+4. La primera vez tarda unos minutos (descarga las imágenes). Cuando veas
+   `Arrancando en http://0.0.0.0:8000`, abre el navegador en
+   <http://localhost:8000>.
+5. Para **detener**: doble clic en `detener-windows.bat` (o `docker compose down`).
+   Para detener **y borrar** los datos: `docker compose down -v`.
+
+> Los acentos y la base de datos de ejemplo se cargan solos. El contenedor es
+> autocontenido (no depende de archivos del host), por lo que evita los típicos
+> problemas de rutas y finales de línea (CRLF) en Windows.
+
 ---
 
 ## Datos de ejemplo (seeds)

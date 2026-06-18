@@ -1,0 +1,10 @@
+# Lo que NO debe copiarse a la imagen Docker (build más rápido y limpio).
+vendor/
+.git/
+node_modules/
+.phpunit.cache/
+.phpunit.result.cache
+.php-cs-fixer.cache
+config.php
+*.zip
+*.png

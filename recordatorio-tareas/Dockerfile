@@ -16,16 +16,20 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 
 # Instalar dependencias primero (mejor cacheo de capas).
-COPY composer.json ./
-RUN composer install --no-interaction --no-progress --no-dev || true
+# Copiamos composer.json y composer.lock para una instalación reproducible.
+COPY composer.json composer.lock ./
+RUN composer install --no-interaction --no-progress --no-dev --no-scripts
 
-# Copiar el resto del proyecto.
+# Copiar el resto del proyecto (vendor/ queda excluido por .dockerignore,
+# así no se pisa el que acabamos de instalar).
 COPY . .
 
 # Usar la configuración basada en variables de entorno.
 ENV RECORDATORIO_CONFIG=/var/www/html/docker/config.docker.php
 
-RUN chmod +x docker/entrypoint.sh
+# Normalizar finales de línea (por si el proyecto se clonó en Windows con CRLF)
+# y dar permisos de ejecución al script de arranque.
+RUN sed -i 's/\r$//' docker/entrypoint.sh && chmod +x docker/entrypoint.sh
 
 EXPOSE 8000
 ENTRYPOINT ["docker/entrypoint.sh"]
