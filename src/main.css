@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold:       #c9a96e;
+  --color-gold-light: #e0c48a;
+  --color-dark:       #0a0a0a;
+  --color-dark-2:     #111111;
+  --color-dark-3:     #1a1a1a;
+  --color-dark-4:     #2a2a2a;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ── Navbar ─────────────────────────────────────────── */
+#navbar {
+  transition: background 0.4s, border-color 0.4s;
+}
+#navbar.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #2a2a2a;
+}
+
+/* ── Filtros de galería ─────────────────────────────── */
+.filtro {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.filtro:hover { color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.15); }
+.filtro.active { color: #c9a96e; border-color: #c9a96e; }
+
+/* ── Galería masonry ────────────────────────────────── */
+.galeria-grid {
+  columns: 1;
+  column-gap: 0.75rem;
+}
+@media (min-width: 640px)  { .galeria-grid { columns: 2; } }
+@media (min-width: 1024px) { .galeria-grid { columns: 3; } }
+
+.galeria-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.galeria-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.55s ease;
+}
+.galeria-item:hover img { transform: scale(1.06); }
+
+.galeria-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  transition: background 0.3s;
+}
+.galeria-item:hover .galeria-overlay { background: rgba(0,0,0,0.45); }
+.galeria-overlay span {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #c9a96e;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.galeria-item:hover .galeria-overlay span { opacity: 1; transform: translateY(0); }
+.galeria-item.oculto { display: none; }
+
+/* ── Lightbox ───────────────────────────────────────── */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+#lightbox.visible { opacity: 1; pointer-events: all; }
+#lightbox img {
+  max-width: 90vw;
+  max-height: 88vh;
+  object-fit: contain;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8);
+}
+#lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+  background: none;
+  border: none;
+}
+#lightbox-close:hover { color: #c9a96e; }
+#lightbox-cat {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ── Tarjetas de servicio ───────────────────────────── */
+.servicio-card {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.servicio-card:hover {
+  border-color: #c9a96e;
+  transform: translateY(-4px);
+}
+.servicio-icono { font-size: 2rem; margin-bottom: 1.25rem; }
+
+/* ── Tarjetas de testimonio ─────────────────────────── */
+.testimonio-card {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  padding: 2rem;
+  transition: border-color 0.3s;
+}
+.testimonio-card:hover { border-color: rgba(201,169,110,0.4); }
+.estrellas { color: #c9a96e; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+
+/* ── Formulario de contacto ─────────────────────────── */
+.campo-label {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.5rem;
+}
+.campo-input {
+  width: 100%;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  color: white;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  appearance: none;
+}
+.campo-input:focus { border-color: #c9a96e; }
+.campo-input option { background: #111; color: white; }
+
+/* ── Animación scroll ───────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Hero fade-in ───────────────────────────────────── */
+.hero-content {
+  animation: heroFade 1.2s ease both;
+}
+@keyframes heroFade {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hamburger ──────────────────────────────────────── */
+.ham { display: block; height: 1px; width: 1.5rem; background: white; transition: transform 0.3s, opacity 0.3s; }
+#hamburger.abierto .ham:nth-child(1) { transform: rotate(45deg) translate(3.5px, 3.5px); }
+#hamburger.abierto .ham:nth-child(2) { opacity: 0; }
+#hamburger.abierto .ham:nth-child(3) { transform: rotate(-45deg) translate(3.5px, -3.5px); }
+
+/* ── Contador hover ─────────────────────────────────── */
+.stat-item { transition: transform 0.2s; }
+.stat-item:hover { transform: translateY(-3px); }

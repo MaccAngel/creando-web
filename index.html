@@ -1,15 +1,529 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="scroll-smooth">
 <head>
-	<meta charset="UTF-8">
-	<title>Estudio fotográfico Fotocol2000</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fotocol2000 — Estudio fotográfico profesional. Bodas, retratos, eventos y fotografía de producto desde el año 2000.">
+  <title>Fotocol2000 — Estudio Fotográfico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-	<h1>Bienvenido a la web del Estudio Fotográfico Fotocol2000</h1>
-	<h2>Esta es la página donde podrás ver nuestros trabajos</h2>
-	<p>Esta es la página donde podrás ver nuestros trabajos</p>
 
+<body class="bg-dark text-white font-sans antialiased">
 
+  <!-- ════════════════════════════════════════════════
+       NAVBAR
+  ═════════════════════════════════════════════════ -->
+  <nav id="navbar" class="fixed top-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <a href="#inicio" class="font-display text-xl tracking-[0.22em] text-gold font-semibold">
+        FOTOCOL2000
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex items-center gap-8 text-[0.65rem] tracking-[0.18em] uppercase text-white/60">
+        <li><a href="#portafolio" class="hover:text-gold transition-colors duration-200">Portafolio</a></li>
+        <li><a href="#servicios"  class="hover:text-gold transition-colors duration-200">Servicios</a></li>
+        <li><a href="#nosotros"   class="hover:text-gold transition-colors duration-200">Nosotros</a></li>
+        <li><a href="#contacto"   class="hover:text-gold transition-colors duration-200">Contacto</a></li>
+        <li>
+          <a href="/admin/" class="border border-gold/50 text-gold px-5 py-2 hover:bg-gold hover:text-dark transition-all duration-200">
+            Admin
+          </a>
+        </li>
+      </ul>
+
+      <!-- Hamburger -->
+      <button id="hamburger" class="md:hidden flex flex-col gap-[5px] p-2" aria-label="Menú">
+        <span class="ham"></span>
+        <span class="ham"></span>
+        <span class="ham"></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-nav" class="hidden md:hidden bg-dark-2 border-t border-dark-4">
+      <ul class="py-5 text-[0.7rem] tracking-[0.18em] uppercase">
+        <li><a href="#portafolio" class="nav-mobile-link block px-8 py-3 hover:text-gold transition-colors">Portafolio</a></li>
+        <li><a href="#servicios"  class="nav-mobile-link block px-8 py-3 hover:text-gold transition-colors">Servicios</a></li>
+        <li><a href="#nosotros"   class="nav-mobile-link block px-8 py-3 hover:text-gold transition-colors">Nosotros</a></li>
+        <li><a href="#contacto"   class="nav-mobile-link block px-8 py-3 hover:text-gold transition-colors">Contacto</a></li>
+        <li><a href="/admin/"     class="block px-8 py-3 text-gold">Admin →</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════
+       HERO
+  ═════════════════════════════════════════════════ -->
+  <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://picsum.photos/seed/fotocol-hero/1920/1080"
+        alt=""
+        class="w-full h-full object-cover object-center"
+        loading="eager"
+        fetchpriority="high"
+      >
+      <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/50 to-black/85"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto pt-24 hero-content">
+      <p class="text-gold text-[0.6rem] tracking-[0.5em] uppercase mb-8">Estudio Fotográfico · Desde 2000</p>
+      <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] mb-8">
+        Capturamos momentos,<br>
+        <em class="text-gold">creamos recuerdos</em>
+      </h1>
+      <p class="text-white/55 text-base md:text-lg max-w-lg mx-auto mb-12 font-light leading-relaxed">
+        Fotografía profesional de bodas, retratos, eventos y producto.<br>
+        Tu historia merece imágenes que duren para siempre.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#portafolio" class="group inline-flex items-center justify-center gap-3 bg-gold text-dark font-medium px-9 py-4 text-[0.65rem] tracking-[0.2em] uppercase hover:bg-gold-light transition-all duration-300">
+          Ver Portafolio
+          <span class="group-hover:translate-x-1 transition-transform duration-200">→</span>
+        </a>
+        <a href="#contacto" class="inline-flex items-center justify-center gap-3 border border-white/25 text-white/75 px-9 py-4 text-[0.65rem] tracking-[0.2em] uppercase hover:border-gold hover:text-gold transition-all duration-300">
+          Reservar Sesión
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none">
+      <div class="w-px h-14 bg-gradient-to-b from-transparent to-gold/50"></div>
+      <span class="text-[0.55rem] tracking-[0.35em] text-white/25 uppercase">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       ESTADÍSTICAS
+  ═════════════════════════════════════════════════ -->
+  <section class="border-y border-dark-4 bg-dark-2">
+    <div class="max-w-7xl mx-auto px-6 py-14 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="stat-item reveal">
+        <div class="font-display text-4xl md:text-5xl text-gold mb-2">+500</div>
+        <div class="text-[0.6rem] tracking-[0.25em] uppercase text-white/30">Bodas</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:0.1s">
+        <div class="font-display text-4xl md:text-5xl text-gold mb-2">+2.000</div>
+        <div class="text-[0.6rem] tracking-[0.25em] uppercase text-white/30">Sesiones</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:0.2s">
+        <div class="font-display text-4xl md:text-5xl text-gold mb-2">24</div>
+        <div class="text-[0.6rem] tracking-[0.25em] uppercase text-white/30">Años de experiencia</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:0.3s">
+        <div class="font-display text-4xl md:text-5xl text-gold mb-2">98%</div>
+        <div class="text-[0.6rem] tracking-[0.25em] uppercase text-white/30">Clientes satisfechos</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       PORTAFOLIO
+  ═════════════════════════════════════════════════ -->
+  <section id="portafolio" class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-16 reveal">
+        <p class="text-gold text-[0.6rem] tracking-[0.45em] uppercase mb-4">Nuestro trabajo</p>
+        <h2 class="font-display text-4xl md:text-5xl mb-5">Portafolio</h2>
+        <p class="text-white/35 text-sm max-w-sm mx-auto leading-relaxed">
+          Cada fotografía cuenta una historia única. Explora nuestros trabajos por categoría.
+        </p>
+      </div>
+
+      <!-- Filtros -->
+      <div class="flex flex-wrap justify-center gap-2 mb-12 reveal">
+        <button class="filtro active" data-filtro="todos">Todos</button>
+        <button class="filtro" data-filtro="bodas">Bodas</button>
+        <button class="filtro" data-filtro="retratos">Retratos</button>
+        <button class="filtro" data-filtro="eventos">Eventos</button>
+        <button class="filtro" data-filtro="producto">Producto</button>
+      </div>
+
+      <!-- Galería masonry -->
+      <div class="galeria-grid">
+        <div class="galeria-item" data-categoria="bodas">
+          <img src="https://picsum.photos/seed/wed01/600/900" alt="Boda en jardín" loading="lazy">
+          <div class="galeria-overlay"><span>Bodas</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="retratos">
+          <img src="https://picsum.photos/seed/por01/600/700" alt="Retrato artístico" loading="lazy">
+          <div class="galeria-overlay"><span>Retratos</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="eventos">
+          <img src="https://picsum.photos/seed/evt01/600/480" alt="Evento corporativo" loading="lazy">
+          <div class="galeria-overlay"><span>Eventos</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="bodas">
+          <img src="https://picsum.photos/seed/wed02/600/820" alt="Ceremonia nupcial" loading="lazy">
+          <div class="galeria-overlay"><span>Bodas</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="producto">
+          <img src="https://picsum.photos/seed/pro01/600/600" alt="Fotografía de producto" loading="lazy">
+          <div class="galeria-overlay"><span>Producto</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="retratos">
+          <img src="https://picsum.photos/seed/por02/600/900" alt="Retrato de familia" loading="lazy">
+          <div class="galeria-overlay"><span>Retratos</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="bodas">
+          <img src="https://picsum.photos/seed/wed03/600/760" alt="Primer plano nupcial" loading="lazy">
+          <div class="galeria-overlay"><span>Bodas</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="eventos">
+          <img src="https://picsum.photos/seed/evt02/600/600" alt="Concierto" loading="lazy">
+          <div class="galeria-overlay"><span>Eventos</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="producto">
+          <img src="https://picsum.photos/seed/pro02/600/800" alt="Producto de lujo" loading="lazy">
+          <div class="galeria-overlay"><span>Producto</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="retratos">
+          <img src="https://picsum.photos/seed/por03/600/680" alt="Retrato profesional" loading="lazy">
+          <div class="galeria-overlay"><span>Retratos</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="bodas">
+          <img src="https://picsum.photos/seed/wed04/600/920" alt="Los novios" loading="lazy">
+          <div class="galeria-overlay"><span>Bodas</span></div>
+        </div>
+        <div class="galeria-item" data-categoria="eventos">
+          <img src="https://picsum.photos/seed/evt03/600/640" alt="Celebración" loading="lazy">
+          <div class="galeria-overlay"><span>Eventos</span></div>
+        </div>
+      </div>
+
+      <div class="text-center mt-14">
+        <a href="#contacto" class="inline-flex items-center gap-2 text-gold text-[0.65rem] tracking-[0.25em] uppercase hover:gap-4 transition-all duration-300">
+          Solicitar sesión personalizada <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       SERVICIOS
+  ═════════════════════════════════════════════════ -->
+  <section id="servicios" class="py-24 md:py-32 bg-dark-2">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-16 reveal">
+        <p class="text-gold text-[0.6rem] tracking-[0.45em] uppercase mb-4">Lo que ofrecemos</p>
+        <h2 class="font-display text-4xl md:text-5xl mb-5">Servicios</h2>
+        <p class="text-white/35 text-sm max-w-sm mx-auto leading-relaxed">
+          Fotografía profesional adaptada a cada necesidad y presupuesto.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="servicio-card reveal">
+          <div class="servicio-icono">💍</div>
+          <h3 class="font-display text-xl mb-3">Bodas</h3>
+          <p class="text-white/40 text-sm leading-relaxed mb-6 flex-1">
+            Reportaje completo desde la preparación hasta el baile. Capturamos cada emoción de tu día especial.
+          </p>
+          <div>
+            <div class="font-display text-2xl text-gold mb-1">desde 1.200€</div>
+            <div class="text-white/25 text-xs mb-5">8h de cobertura · álbum incluido</div>
+            <a href="#contacto" class="block text-center border border-gold/40 text-gold text-[0.6rem] tracking-[0.2em] uppercase py-3 hover:bg-gold hover:text-dark transition-all duration-300">
+              Consultar
+            </a>
+          </div>
+        </div>
+
+        <div class="servicio-card reveal" style="transition-delay:0.1s">
+          <div class="servicio-icono">📸</div>
+          <h3 class="font-display text-xl mb-3">Retratos</h3>
+          <p class="text-white/40 text-sm leading-relaxed mb-6 flex-1">
+            Sesiones profesionales de retrato individual, familiar o artístico en estudio o exteriores.
+          </p>
+          <div>
+            <div class="font-display text-2xl text-gold mb-1">desde 150€</div>
+            <div class="text-white/25 text-xs mb-5">1h · 20 fotos editadas</div>
+            <a href="#contacto" class="block text-center border border-gold/40 text-gold text-[0.6rem] tracking-[0.2em] uppercase py-3 hover:bg-gold hover:text-dark transition-all duration-300">
+              Consultar
+            </a>
+          </div>
+        </div>
+
+        <div class="servicio-card reveal" style="transition-delay:0.2s">
+          <div class="servicio-icono">🎉</div>
+          <h3 class="font-display text-xl mb-3">Eventos</h3>
+          <p class="text-white/40 text-sm leading-relaxed mb-6 flex-1">
+            Cobertura de eventos corporativos, conciertos, deportivos y celebraciones privadas.
+          </p>
+          <div>
+            <div class="font-display text-2xl text-gold mb-1">desde 350€</div>
+            <div class="text-white/25 text-xs mb-5">4h · galería online privada</div>
+            <a href="#contacto" class="block text-center border border-gold/40 text-gold text-[0.6rem] tracking-[0.2em] uppercase py-3 hover:bg-gold hover:text-dark transition-all duration-300">
+              Consultar
+            </a>
+          </div>
+        </div>
+
+        <div class="servicio-card reveal" style="transition-delay:0.3s">
+          <div class="servicio-icono">🛍️</div>
+          <h3 class="font-display text-xl mb-3">Producto</h3>
+          <p class="text-white/40 text-sm leading-relaxed mb-6 flex-1">
+            Fotografía de producto para e-commerce, catálogos y campañas. Fondos blancos o creativos.
+          </p>
+          <div>
+            <div class="font-display text-2xl text-gold mb-1">desde 80€</div>
+            <div class="text-white/25 text-xs mb-5">por producto · entrega 48h</div>
+            <a href="#contacto" class="block text-center border border-gold/40 text-gold text-[0.6rem] tracking-[0.2em] uppercase py-3 hover:bg-gold hover:text-dark transition-all duration-300">
+              Consultar
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       NOSOTROS
+  ═════════════════════════════════════════════════ -->
+  <section id="nosotros" class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <div class="relative reveal">
+          <img
+            src="https://picsum.photos/seed/fotocol-studio/700/900"
+            alt="Nuestro estudio"
+            class="w-full object-cover"
+            loading="lazy"
+          >
+          <div class="absolute -bottom-6 -right-6 bg-gold text-dark p-8 hidden md:block">
+            <div class="font-display text-5xl font-bold leading-none">24</div>
+            <div class="text-[0.6rem] tracking-[0.2em] uppercase mt-2 leading-relaxed">
+              años capturando<br>tu historia
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal" style="transition-delay:0.15s">
+          <p class="text-gold text-[0.6rem] tracking-[0.45em] uppercase mb-4">Sobre nosotros</p>
+          <h2 class="font-display text-4xl md:text-5xl mb-8 leading-tight">
+            Una <em>pasión</em><br>convertida en profesión
+          </h2>
+          <div class="space-y-4 text-white/45 text-sm md:text-base leading-relaxed">
+            <p>Fotocol2000 nació en el año 2000 con una cámara, mucha ilusión y el convencimiento de que la fotografía es el lenguaje universal de las emociones.</p>
+            <p>Desde entonces, hemos capturado más de 500 bodas, miles de retratos y cientos de eventos en toda España. Cada disparo es una historia que merece ser preservada.</p>
+            <p>Combinamos técnica impecable con una mirada artística propia, creando imágenes que emocionan y perduran generación tras generación.</p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-dark-4">
+            <div>
+              <div class="font-display text-2xl text-gold mb-1">Canon R5</div>
+              <div class="text-[0.6rem] tracking-widest uppercase text-white/25">Equipo profesional</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl text-gold mb-1">RAW</div>
+              <div class="text-[0.6rem] tracking-widest uppercase text-white/25">Siempre</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl text-gold mb-1">48h</div>
+              <div class="text-[0.6rem] tracking-widest uppercase text-white/25">Entrega fotos</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       TESTIMONIOS
+  ═════════════════════════════════════════════════ -->
+  <section class="py-24 md:py-32 bg-dark-2">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-16 reveal">
+        <p class="text-gold text-[0.6rem] tracking-[0.45em] uppercase mb-4">Lo que dicen</p>
+        <h2 class="font-display text-4xl md:text-5xl">Clientes felices</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="testimonio-card reveal">
+          <div class="estrellas">★★★★★</div>
+          <blockquote class="text-white/60 text-sm leading-relaxed mb-6 font-light italic">
+            "Las fotos de nuestra boda son simplemente perfectas. Capturaron cada momento con una sensibilidad increíble. Las recomendamos sin dudarlo a todo el mundo."
+          </blockquote>
+          <div class="flex items-center gap-3">
+            <img src="https://picsum.photos/seed/cli01/80/80" alt="" class="w-10 h-10 rounded-full object-cover">
+            <div>
+              <div class="text-white text-sm font-medium">María y Juan</div>
+              <div class="text-white/25 text-xs">Boda · junio 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonio-card reveal" style="transition-delay:0.1s">
+          <div class="estrellas">★★★★★</div>
+          <blockquote class="text-white/60 text-sm leading-relaxed mb-6 font-light italic">
+            "El reportaje de nuestro evento corporativo superó todas las expectativas. Profesionalidad total y resultados espectaculares desde el primer momento."
+          </blockquote>
+          <div class="flex items-center gap-3">
+            <img src="https://picsum.photos/seed/cli02/80/80" alt="" class="w-10 h-10 rounded-full object-cover">
+            <div>
+              <div class="text-white text-sm font-medium">Carlos Pérez</div>
+              <div class="text-white/25 text-xs">Director de marketing · Innotec</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonio-card reveal" style="transition-delay:0.2s">
+          <div class="estrellas">★★★★★</div>
+          <blockquote class="text-white/60 text-sm leading-relaxed mb-6 font-light italic">
+            "La sesión de fotos de producto disparó nuestras ventas online un 40%. Las imágenes son de una calidad extraordinaria y llegaron antes de lo esperado."
+          </blockquote>
+          <div class="flex items-center gap-3">
+            <img src="https://picsum.photos/seed/cli03/80/80" alt="" class="w-10 h-10 rounded-full object-cover">
+            <div>
+              <div class="text-white text-sm font-medium">Ana García</div>
+              <div class="text-white/25 text-xs">CEO · Boutique Luna</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       CONTACTO
+  ═════════════════════════════════════════════════ -->
+  <section id="contacto" class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+        <!-- Info -->
+        <div class="reveal">
+          <p class="text-gold text-[0.6rem] tracking-[0.45em] uppercase mb-4">Hablemos</p>
+          <h2 class="font-display text-4xl md:text-5xl mb-8 leading-tight">
+            Cuéntanos<br><em>tu historia</em>
+          </h2>
+          <p class="text-white/40 text-sm leading-relaxed mb-10">
+            ¿Tienes una fecha en mente? ¿Un proyecto especial?<br>
+            Escríbenos y te respondemos en menos de 24 horas.
+          </p>
+
+          <div class="space-y-6 mb-10">
+            <div class="flex items-start gap-4">
+              <span class="text-gold text-lg mt-0.5">📞</span>
+              <div>
+                <div class="text-[0.6rem] tracking-[0.2em] uppercase text-white/25 mb-1">Teléfono</div>
+                <a href="tel:+34600000000" class="text-sm hover:text-gold transition-colors">+34 600 000 000</a>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="text-gold text-lg mt-0.5">✉️</span>
+              <div>
+                <div class="text-[0.6rem] tracking-[0.2em] uppercase text-white/25 mb-1">Email</div>
+                <a href="mailto:hola@fotocol2000.es" class="text-sm hover:text-gold transition-colors">hola@fotocol2000.es</a>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="text-gold text-lg mt-0.5">📍</span>
+              <div>
+                <div class="text-[0.6rem] tracking-[0.2em] uppercase text-white/25 mb-1">Estudio</div>
+                <span class="text-sm">Calle Mayor 1, Madrid</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="text-gold text-lg mt-0.5">🕐</span>
+              <div>
+                <div class="text-[0.6rem] tracking-[0.2em] uppercase text-white/25 mb-1">Horario</div>
+                <span class="text-sm">Lun–Vie 9:00–19:00 · Sáb 10:00–14:00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-3">
+            <a href="#" aria-label="Instagram" class="w-10 h-10 border border-dark-4 flex items-center justify-center text-white/30 text-xs hover:border-gold hover:text-gold transition-all duration-200">ig</a>
+            <a href="#" aria-label="Facebook"  class="w-10 h-10 border border-dark-4 flex items-center justify-center text-white/30 text-xs hover:border-gold hover:text-gold transition-all duration-200">fb</a>
+            <a href="#" aria-label="LinkedIn"   class="w-10 h-10 border border-dark-4 flex items-center justify-center text-white/30 text-xs hover:border-gold hover:text-gold transition-all duration-200">in</a>
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <div class="reveal" style="transition-delay:0.15s">
+          <form id="form-contacto" class="space-y-5" novalidate>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="campo-label">Nombre *</label>
+                <input type="text" name="nombre" class="campo-input" placeholder="Tu nombre" required>
+              </div>
+              <div>
+                <label class="campo-label">Email *</label>
+                <input type="email" name="email" class="campo-input" placeholder="tu@email.com" required>
+              </div>
+            </div>
+
+            <div>
+              <label class="campo-label">Tipo de sesión</label>
+              <select name="tipo_sesion" class="campo-input">
+                <option value="">Selecciona…</option>
+                <option value="bodas">Boda</option>
+                <option value="retratos">Retrato / Familia</option>
+                <option value="eventos">Evento</option>
+                <option value="producto">Fotografía de producto</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="campo-label">Fecha aproximada</label>
+              <input type="date" name="fecha" class="campo-input">
+            </div>
+
+            <div>
+              <label class="campo-label">Mensaje *</label>
+              <textarea name="mensaje" rows="5" class="campo-input resize-none" placeholder="Cuéntanos tu proyecto…" required></textarea>
+            </div>
+
+            <div id="form-aviso" class="hidden text-sm py-3 px-4"></div>
+
+            <button
+              type="submit"
+              id="btn-enviar"
+              class="w-full bg-gold text-dark font-medium py-4 text-[0.65rem] tracking-[0.22em] uppercase hover:bg-gold-light transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Enviar mensaje
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════
+       FOOTER
+  ═════════════════════════════════════════════════ -->
+  <footer class="border-t border-dark-4 bg-dark-2">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <a href="#inicio" class="font-display text-lg tracking-[0.22em] text-gold">FOTOCOL2000</a>
+        <nav class="flex flex-wrap justify-center gap-6 text-[0.6rem] tracking-[0.2em] uppercase text-white/25">
+          <a href="#portafolio" class="hover:text-gold transition-colors">Portafolio</a>
+          <a href="#servicios"  class="hover:text-gold transition-colors">Servicios</a>
+          <a href="#nosotros"   class="hover:text-gold transition-colors">Nosotros</a>
+          <a href="#contacto"   class="hover:text-gold transition-colors">Contacto</a>
+          <a href="/admin/"     class="hover:text-gold transition-colors">Admin</a>
+        </nav>
+        <p class="text-[0.6rem] text-white/15">© 2000–2026 Fotocol2000. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>
